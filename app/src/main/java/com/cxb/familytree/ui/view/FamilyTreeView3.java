@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.cxb.familytree.R;
 import com.cxb.familytree.db.FamilyDBHelper;
 import com.cxb.familytree.interfaces.OnFamilyClickListener;
@@ -699,11 +700,13 @@ public class FamilyTreeView3 extends ViewGroup {
         final String sex = family.getSex();
         Glide.with(getContext())
                 .load(url)
-                .placeholder("2".equals(sex) ? R.drawable.ic_female_avatar : R.drawable.ic_male_avatar)
-                .error("2".equals(sex) ? R.drawable.ic_female_avatar : R.drawable.ic_male_avatar)
-                .centerCrop()
-                .dontAnimate()
-                .into(ivAvatar);
+                .apply(new RequestOptions()
+                        .placeholder("2".equals(sex) ? R.drawable.ic_female_avatar : R.drawable.ic_male_avatar)
+                        .error("2".equals(sex) ? R.drawable.ic_female_avatar : R.drawable.ic_male_avatar)
+                        .centerCrop()
+                        .dontAnimate()
+                )
+                        .into(ivAvatar);
         if (family.isSelect()) {
             familyView.setBackgroundResource(R.drawable.shape_bg_select);
             llBackground.setBackgroundResource("2".equals(sex) ? R.color.red_middle : R.color.green_middle);

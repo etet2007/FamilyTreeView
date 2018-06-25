@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.cxb.familytree.R;
 import com.cxb.familytree.interfaces.OnFamilySelectListener;
 import com.cxb.familytree.model.FamilyMember;
@@ -325,11 +326,11 @@ public class FamilyTreeView extends ViewGroup {
         if (!TextUtils.isEmpty(url)) {
             Glide.with(getContext())
                     .load(url)
-                    .placeholder(R.drawable.family_avatar)
-                    .error(R.drawable.family_avatar)
-                    .centerCrop()
-                    .transform(new GlideCircleTransform(getContext()))
-                    .dontAnimate()
+                    .apply(new RequestOptions().placeholder(R.drawable.family_avatar)
+                            .centerCrop()
+                            .transform(new GlideCircleTransform(getContext()))
+                            .dontAnimate()
+                    )
                     .into(ivAvatar);
         }
         if (family.isSelect()) {
