@@ -2,6 +2,7 @@ package com.cxb.familytree;
 
 import android.app.Application;
 
+import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
 
 /**
@@ -10,27 +11,26 @@ import com.orhanobut.logger.Logger;
 
 public class MyApplication extends Application {
 
-    private static MyApplication INStANCE;
+  private static MyApplication sInstance;
 
-    public MyApplication() {
-        INStANCE = this;
-    }
+  public MyApplication() {
+    sInstance = this;
+  }
 
-    public static MyApplication getInstance() {
-        if (INStANCE == null) {
-            synchronized (MyApplication.class) {
-                if (INStANCE == null) {
-                    INStANCE = new MyApplication();
-                }
-            }
+  public static MyApplication getInstance() {
+    if (sInstance == null) {
+      synchronized (MyApplication.class) {
+        if (sInstance == null) {
+          sInstance = new MyApplication();
         }
-        return INStANCE;
+      }
     }
+    return sInstance;
+  }
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
-
-        Logger.init(getString(R.string.app_name));
-    }
+  @Override
+  public void onCreate() {
+    super.onCreate();
+    Logger.addLogAdapter(new AndroidLogAdapter());
+  }
 }

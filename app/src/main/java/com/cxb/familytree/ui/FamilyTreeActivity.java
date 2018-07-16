@@ -43,8 +43,9 @@ public class FamilyTreeActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_family_tree);
 
-        initView();
+        initViews();//findViewById
 
+        //动态请求Permission 挺通用的一段代码
         String appName = getString(R.string.app_name);
         permissions = new String[]{
                 Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -68,7 +69,7 @@ public class FamilyTreeActivity extends BaseActivity {
         setData();
     }
 
-    private void initView() {
+    private void initViews() {
         tvChangeType = (TextView) findViewById(R.id.tv_change_type);
         btnEnlarge = (Button) findViewById(R.id.btn_enlarge);
         btnShrinkDown = (Button) findViewById(R.id.btn_shrink_down);
